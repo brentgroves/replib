@@ -47,6 +47,7 @@ func RunScript(name string) string {
 	// here we pass the command as the first argument and the arguments to pass to the command as the
 	// remaining arguments in the function
 	cmd := exec.Command("ls", "./")
+	// an alternate way is: out, err := exec.Command("ls", "-l").Output()
 
 	// The `Output` method executes the command and
 	// collects the output, returning its value
@@ -65,20 +66,19 @@ func RunScript(name string) string {
 	// like glob patterns or expansions will not be done.
 
 	// https://www.sohamkamani.com/golang/exec-shell-command/
-	// If we tried executing this type of command using cmd.Output,
+	// If we tried executing ping using cmd.Output,
 	// we wouldn’t get any output, since the Output method waits
 	// for the command to execute, and the ping command executes
 	// indefinitely.
-	// Instead, we can a custom Stdout attribute to read output
+	// Instead, we can create a custom Stdout attribute to read output
 	// continuously:
 
 	// cmd2 := exec.Command("ping", "google.com")
-
 	// // pipe the commands output to the applications
 	// // standard output
 	// cmd2.Stdout = os.Stdout
 
-	// // Run still runs the command and waits for completion
+	// // Runs the command and waits for completion
 	// // but the output is instantly piped to Stdout
 	// if err := cmd2.Run(); err != nil {
 	// 	fmt.Println("could not run command: ", err)
